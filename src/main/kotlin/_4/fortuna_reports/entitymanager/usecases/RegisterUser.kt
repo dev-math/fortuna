@@ -3,6 +3,7 @@ package _4.fortuna_reports.entitymanager.usecases
 import _4.fortuna_reports.entitymanager.Student
 import _4.fortuna_reports.entitymanager.User
 import _4.fortuna_reports.entitymanager.UserRole
+import _4.fortuna_reports.entitymanager.UspNumber
 import _4.fortuna_reports.entitymanager.exceptions.UserAlreadyExistsException
 import _4.fortuna_reports.entitymanager.persistence.StudentRepository
 import _4.fortuna_reports.entitymanager.persistence.UserRepository
@@ -51,7 +52,7 @@ class RegisterUser(
 }
 
 data class RegisterUserRequest(
-    val uspNumber: String,
+    val uspNumber: UspNumber,
     val role: UserRole,
     val course: String,
     val advisor: String,
@@ -68,9 +69,7 @@ data class RegisterUserRequest(
             RegisterUserRequest::lattesProfile {
                 pattern("^(http|https)://.*$") hint "O link do currículo Lattes deve ser uma URL válida."
             }
-            RegisterUserRequest::uspNumber {
-                pattern("^\\d{8}$") hint "O número USP deve ser composto por 8 números."
-            }
+            //TODO: validar numero usp
         }.validate(this)
     }
 }

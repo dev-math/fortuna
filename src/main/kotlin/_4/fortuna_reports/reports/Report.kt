@@ -1,15 +1,15 @@
 package _4.fortuna_reports.reports
 
+import _4.fortuna_reports.entitymanager.UspNumber
 import jakarta.persistence.*
 import java.time.LocalDateTime
-import javax.annotation.processing.Generated
+import java.util.*
 
 @Entity
 @Table(name = "reports")
 data class Report(
-    @Id @GeneratedValue(strategy = GenerationType.UUID) val id: String? = null,
-    val studentUspNumber: String,
-    val createdAt: LocalDateTime? = null,
+    @Id val id: String = UUID.randomUUID().toString(),
+    val studentUspNumber: UspNumber,
     val articlesInWriting: Int,
     val articlesSubmitted: Int,
     val articlesAccepted: Int,
@@ -17,4 +17,5 @@ data class Report(
     val researchSummary: String,
     val additionalDeclaration: String,
     val difficultyDetails: String? = null,
+    val createdAt: LocalDateTime? = null,
 )
