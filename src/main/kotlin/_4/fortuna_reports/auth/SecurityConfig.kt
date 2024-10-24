@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser
+import org.springframework.security.oauth2.core.oidc.user.OidcUser
 import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
@@ -45,9 +46,17 @@ class SecurityConfig {
         val delegate = OidcUserService()
 
         return object : OidcUserService() {
-            override fun loadUser(userRequest: org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest): DefaultOidcUser {
+            override fun loadUser(userRequest: org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest): OidcUser {
                 // Load the default OIDC user
                 val oidcUser = delegate.loadUser(userRequest)
+
+                // Get the user's email
+                val email = oidcUser.attributes["email"] as String?
+
+                // Check if the email ends with @usp.br
+                if (email == null || !email.endsWith("@usp.br")) {
+                    throw IllegalArgumentException("Unauthorized: User email must be @usp.br")
+                }
 
                 // Get the existing authorities (roles from the OAuth provider)
                 val authorities = oidcUser.authorities.toMutableSet()
