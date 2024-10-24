@@ -69,7 +69,11 @@ data class RegisterUserRequest(
             RegisterUserRequest::lattesProfile {
                 pattern("^(http|https)://.*$") hint "O link do currículo Lattes deve ser uma URL válida."
             }
-            //TODO: validar numero usp
+            RegisterUserRequest::uspNumber {
+                addConstraint("O número USP deve conter apenas dígitos e não pode começar com zero.") {
+                    !it.toString().matches(Regex("^(?!0)\\d+$"))
+                }
+            }
         }.validate(this)
     }
 }
