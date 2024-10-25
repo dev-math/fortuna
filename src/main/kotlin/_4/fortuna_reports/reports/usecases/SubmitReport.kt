@@ -2,7 +2,7 @@ package _4.fortuna_reports.reports.usecases
 
 import _4.fortuna_reports.entitymanager.persistence.UserRepository
 import _4.fortuna_reports.reports.Report
-import _4.fortuna_reports.reports.ReportRepository
+import _4.fortuna_reports.reports.persistence.ReportRepository
 import _4.fortuna_reports.reports.exceptions.InvalidSubmissionPeriodException
 import _4.fortuna_reports.utils.UseCase
 import org.springframework.security.core.context.SecurityContextHolder
