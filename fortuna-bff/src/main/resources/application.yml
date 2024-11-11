@@ -8,3 +8,4 @@ spring:
     scope: profile, email, openid
     redirect-uri: "{baseUrl}/login/oauth2/code/google"
     authorization-grant-type: authorization_code
+  h2.console.enabled: true

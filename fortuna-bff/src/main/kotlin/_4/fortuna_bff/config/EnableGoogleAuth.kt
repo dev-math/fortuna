@@ -17,10 +17,12 @@ class EnableGoogleAuth {
             .authorizeRequests { it.
                 requestMatchers("/login/oauth2/code/google")
                     .permitAll()
-                .anyRequest()
-                    .authenticated()
                 .requestMatchers("/signup")
                     .hasRole(User.UserRole.UNKNOWN.name)
+                .requestMatchers("/h2-console")
+                    .permitAll()
+                .anyRequest()
+                    .authenticated()
             }
             .oauth2Login {
                 it.userInfoEndpoint {
