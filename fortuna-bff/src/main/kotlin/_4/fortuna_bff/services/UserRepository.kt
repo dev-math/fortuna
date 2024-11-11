@@ -1,4 +1,4 @@
-package _4.fortuna_bff
+package _4.fortuna_bff.services
 
 import org.springframework.data.jpa.repository.JpaRepository
 

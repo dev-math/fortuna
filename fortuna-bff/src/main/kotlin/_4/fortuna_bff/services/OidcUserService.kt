@@ -1,5 +1,7 @@
-package _4.fortuna_bff
+package _4.fortuna_bff.services
 
+import _4.fortuna_bff.model.CustomOidcUser
+import _4.fortuna_bff.model.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.GrantedAuthority

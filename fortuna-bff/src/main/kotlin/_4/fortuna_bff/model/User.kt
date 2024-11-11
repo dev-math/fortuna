@@ -1,4 +1,4 @@
-package _4.fortuna_bff
+package _4.fortuna_bff.model
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -13,7 +13,7 @@ data class User(
     @Column(unique = true) val uspNumber: String? = null,
     @Column(unique = true) val email: String,
     val name: String,
-    val roles: List<UserRole>
+    val roles: List<UserRole>,
 ) {
     enum class UserRole {
         UNKNOWN,
