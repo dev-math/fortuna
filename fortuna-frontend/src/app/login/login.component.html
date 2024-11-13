@@ -1,0 +1,91 @@
+<style>
+  nav {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  section {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to bottom, #1094AB, #1094AB 33.33%, #64C4D2 33.33%, #64C4D2 66.66%, #FCB421 66.66%);
+  }
+
+  section img {
+    position: relative;
+    top: 1em;
+  }
+
+  #google-btn { 
+    transition: background-color .3s, box-shadow .3s;
+
+    padding: 12px 16px 12px 42px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+
+    color: #757575;
+    font-size: 14px;
+    font-weight: 500;
+
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: 12px 11px;
+  }
+
+  #google-btn:hover {
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+  }
+
+  #google-btn:active {
+    background-color: #eeeeee;
+  }
+  
+  #google-btn:focus {
+    outline: none;
+    box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
+  }
+
+  main {
+    text-align: center;
+  }
+
+  .text-xg {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+</style>
+
+<header>
+  <nav role="navigation">
+    <button mat-icon-button aria-label="Botão com ícone de menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <p>Fortuna</p>
+
+    <button mat-icon-button aria-label="Botão com ícone circular que representa a conta do usuário">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </nav>
+  <section>
+    <img src="/logo.svg" alt="Logo 75 anos da USP">
+  </section>
+</header>
+
+<main>
+  <h1>Fortuna</h1>
+  <p class="text-xg">Bem-vindo<br>Faça seu login</p>
+
+  <button (click)="login()" id="google-btn">Faça seu login com o google</button>
+  <p class="text-sm">Entre com seu email &#64;usp.br.</p>
+</main>
