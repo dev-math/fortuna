@@ -4,6 +4,7 @@ import _4.fortuna_bff.model.CustomOidcUser
 import _4.fortuna_bff.model.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest
@@ -14,8 +15,7 @@ import org.springframework.stereotype.Service
 @Service
 class OidcUserService(
     private val userRepository: UserRepository,
-) : OidcUserService() {
-
+): OidcUserService() {
     override fun loadUser(request: OidcUserRequest): CustomOidcUser {
         val oidcUser = super.loadUser(request)
 

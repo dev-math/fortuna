@@ -1,4 +1,4 @@
-logging.level.root: DEBUG
+logging.level.org.springframework.security: TRACE
 
 spring:
   application.name: fortuna-bff
@@ -6,6 +6,5 @@ spring:
     client-id: ${GOOGLE_CLIENT_ID}
     client-secret: ${GOOGLE_CLIENT_SECRET}
     scope: profile, email, openid
-    redirect-uri: "{baseUrl}/login/oauth2/code/google"
     authorization-grant-type: authorization_code
   h2.console.enabled: true
