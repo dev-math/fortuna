@@ -28,7 +28,8 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/styles.css"
+              "src/styles.css",
+              "src/reset.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -91,7 +92,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/reset.css"
             ],
             "scripts": []
           }

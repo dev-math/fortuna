@@ -1,4 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Open Sans", sans-serif; 
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: "Open Sans", sans-serif; }
+.stack > * + * {
+  margin-block-start: 1.5rem;
+}
+
+.stack-large > * + * {
+  margin-block-start: 3rem;
+}
+
+.stack-small > * + * {
+  margin-block-start: 0.5rem;
+}
