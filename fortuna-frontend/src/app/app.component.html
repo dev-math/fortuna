@@ -1,1 +1,37 @@
+<style>
+  nav {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  section {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to bottom, #1094AB, #1094AB 33.33%, #64C4D2 33.33%, #64C4D2 66.66%, #FCB421 66.66%);
+    margin-bottom: 1em;
+  }
+
+  section img {
+    position: relative;
+    top: 1em;
+  }
+</style>
+
+<header>
+  <nav role="navigation">
+    <button mat-icon-button aria-label="Botão com ícone de menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <p>Fortuna</p>
+
+    <button mat-icon-button aria-label="Botão com ícone circular que representa a conta do usuário">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </nav>
+  <section>
+    <img src="/logo.svg" alt="Logo 75 anos da USP">
+  </section>
+</header>
+
 <router-outlet />

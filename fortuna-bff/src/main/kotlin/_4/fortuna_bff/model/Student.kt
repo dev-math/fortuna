@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name = "student_details")
-data class StudentDetails(
+class StudentDetails(
     @Id val id: String = UUID.randomUUID().toString(),
     val course: String,
     val advisor: String,

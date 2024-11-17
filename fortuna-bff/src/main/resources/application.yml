@@ -1,4 +1,4 @@
-logging.level.org.springframework.security: TRACE
+logging.level.root: DEBUG
 
 spring:
   application.name: fortuna-bff

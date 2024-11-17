@@ -4,13 +4,16 @@ import _4.fortuna_bff.model.CustomOidcUser
 import _4.fortuna_bff.model.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException
 import org.springframework.stereotype.Service
+import kotlin.also
+import kotlin.collections.union
 
 @Service
 class OidcUserService(
@@ -29,7 +32,7 @@ class OidcUserService(
         val user = User(
             name = oidcUser.name,
             email = oidcUser.email,
-            roles = storedUser?.roles ?: listOf(User.UserRole.UNKNOWN),
+            roles = storedUser?.roles ?: mutableSetOf(User.UserRole.UNKNOWN),
         )
 
         if (storedUser == null) {
@@ -37,13 +40,34 @@ class OidcUserService(
             userRepository.save(user)
         }
 
-        val userAuthorities = oidcUser.authorities + userRolesToAuthorities(user.roles)
+        val userAuthorities = oidcUser.authorities union userRolesToAuthorities(user.roles)
 
         logger.debug("Loading user {} with authorities {}", oidcUser, userAuthorities)
         return CustomOidcUser(oidcUser, userAuthorities)
     }
 
-    private fun userRolesToAuthorities(roles: List<User.UserRole>): Collection<GrantedAuthority> {
+    fun refreshRolesInContext(roles: Set<User.UserRole>) {
+        val authentication = SecurityContextHolder.getContext().authentication as OAuth2AuthenticationToken
+        val user = authentication.principal as CustomOidcUser
+
+        logger.info("Refreshing user {} roles {}", user.name, roles)
+
+        val authorities = user.authorities.filterNot { it.authority.startsWith("ROLE_")} union userRolesToAuthorities(roles)
+
+        authorities.forEach { logger.info("Autoridade {}", it.authority) }
+
+        val updatedUser = CustomOidcUser(user, authorities)
+
+        val newAuthentication = OAuth2AuthenticationToken(
+            updatedUser,
+            authorities,
+            authentication.authorizedClientRegistrationId,
+        )
+
+        SecurityContextHolder.getContext().authentication = newAuthentication
+    }
+
+    private fun userRolesToAuthorities(roles: Set<User.UserRole>): Collection<GrantedAuthority> {
         return roles.map {
             SimpleGrantedAuthority("ROLE_${it.name}")
         }

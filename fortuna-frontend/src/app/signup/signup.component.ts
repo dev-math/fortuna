@@ -1,31 +1,52 @@
 import { CommonModule } from "@angular/common";
 import { Component, Injectable, OnInit } from "@angular/core";
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatError, MatFormFieldModule} from '@angular/material/form-field';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatButtonModule} from '@angular/material/button';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { AuthService } from "../auth/auth.service";
-import { User } from "../auth/user";
 
 @Injectable({providedIn: 'root'})
 @Component({
   selector: 'signup',
   standalone: true,
-  imports: [CommonModule],
-  template: `
-  <h1>Signup screen</h1>
-  <div *ngIf="user; else loading">
-    <p>User email {{ user.email }}</p>
-    <p>User name {{ user.name }}</p>
-    <p>User roles {{ user.roles.join('","') }}</p>
-  </div>
-  <ng-template #loading>Carregando...</ng-template>
-`
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatRadioModule, MatButtonModule, CommonModule, ReactiveFormsModule, MatError],
+  templateUrl: './signup.component.html'
 })
-export class SignUpComponent implements OnInit {
-  public user: User | null = null;
+export class SignUpComponent {
+  signupForm: FormGroup;
+  isSubmitted = false;
+  errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.signupForm = this.fb.group({
+      uspNumber: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
+      role: ['STUDENT', Validators.required],
+      course: ['', [Validators.required, Validators.pattern('Mestrado|Doutorado')]],
+      advisor: ['', [Validators.required, Validators.minLength(3)]],
+      lattesProfile: ['', [Validators.required, Validators.pattern('^(http|https)://.*$')]]
+    });
+  }
 
-  ngOnInit(): void {
-    this.authService.getUserDetails().subscribe(user => {
-      this.user = user
+  onSubmit() {
+    console.log(this.signupForm.value.uspNumber)
+    this.isSubmitted = true;
+    if (!this.signupForm.valid) {
+      this.errorMessage = "Atente-se aos campos invalidos";
+      return;
+    }
+    const request = {...this.signupForm.value, role: 'STUDENT'};
+    console.log("Request ", request);
+    this.authService.registerStudent(request).subscribe({
+      next: () => {
+        console.debug("Estudante registrado com sucesso. Redirecionando para home");
+      },
+      error: (e) => {
+        this.errorMessage = "Erro no cadastro. Tente novamente mais tarde";
+        console.error("Erro ao registrar o estudante. Error ", e);
+      }
     })
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +9,14 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): MaybeAsync<GuardResult> {
+  canActivate(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot)  {
     const allowedRoles = route.data['roles'] as string[];
-    if (this.authService.isAuthorized(allowedRoles)) {
-      return true;
-    }
-
-    this.router.navigate(["/login"]);
-    return false;
+    return this.authService.isAuthorized(allowedRoles).pipe(
+      tap(isAuthorized => {
+        if (!isAuthorized) {
+          this.router.navigate(["/login"]);
+        }
+      })
+    )
   }
 }

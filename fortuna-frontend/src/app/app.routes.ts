@@ -5,5 +5,5 @@ import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignUpComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_UNKWOWN'] }},
+  { path: 'signup', component: SignUpComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_UNKNOWN'] }},
 ];

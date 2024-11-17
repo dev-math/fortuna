@@ -1,0 +1,66 @@
+<style>
+main {
+  padding: 5vh clamp(1rem, 5vw, 3rem) 1rem;
+}
+
+main > * {
+  width: min(100%, 70ch);
+  margin-inline: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+</style>
+
+<main class="stack">
+  <h1>Cadastro de estudantes</h1>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="stack-small">
+    <mat-form-field>
+      <mat-label>Número USP</mat-label>
+      <input matInput formControlName="uspNumber">
+      <mat-error *ngIf="isSubmitted && signupForm.get('uspNumber')?.invalid">
+        Número USP é obrigatório e deve ser um número válido.
+      </mat-error>
+    </mat-form-field>
+
+    <div>
+      <label style="display: block">Curso</label>
+      <mat-radio-group formControlName="course" aria-label="Selecione uma opção">
+        <mat-radio-button value="Mestrado">Mestrado</mat-radio-button>
+        <mat-radio-button value="Doutorado">Doutorado</mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="isSubmitted && signupForm.get('course')?.invalid">
+        Campo obrigatório
+      </mat-error>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Orientador</mat-label>
+      <mat-select formControlName="advisor">
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+      <mat-error *ngIf="isSubmitted && signupForm.get('advisor')?.invalid">
+        Selecione um orientador
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Link do perfil do Lattes</mat-label>
+      <input matInput formControlName="lattesProfile">
+      <mat-error *ngIf="isSubmitted && signupForm.get('lattesProfile')?.invalid">
+        O link do currículo Lattes deve ser uma URL válida.
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <button type="submit" mat-flat-button>Enviar</button>
+  </form>
+</main>
