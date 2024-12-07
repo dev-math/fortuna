@@ -1,4 +1,4 @@
-package _4.fortuna_bff.model
+package _4.fortuna_bff.core
 
 import jakarta.persistence.*
 import java.util.EnumSet
@@ -18,10 +18,10 @@ class User(
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns = [JoinColumn(name = "user_id")])
     @Enumerated(EnumType.STRING)
-    var roles: MutableSet<UserRole> = mutableSetOf(),
+    var roles: MutableSet<Role> = mutableSetOf(),
 
 ) {
-    enum class UserRole {
+    enum class Role {
         UNKNOWN,
         STUDENT,
         PROFESSOR,
