@@ -7,6 +7,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { AuthService } from "../auth/auth.service";
+import { Router } from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 @Component({
@@ -23,7 +24,6 @@ export class SignUpComponent {
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.signupForm = this.fb.group({
       uspNumber: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
-      role: ['STUDENT', Validators.required],
       course: ['', [Validators.required, Validators.pattern('Mestrado|Doutorado')]],
       advisor: ['', [Validators.required, Validators.minLength(3)]],
       lattesProfile: ['', [Validators.required, Validators.pattern('^(http|https)://.*$')]]
@@ -37,7 +37,7 @@ export class SignUpComponent {
       this.errorMessage = "Atente-se aos campos invalidos";
       return;
     }
-    const request = {...this.signupForm.value, role: 'STUDENT'};
+    const request = {...this.signupForm.value, email: this.authService.currentUser()?.email};
     console.log("Request ", request);
     this.authService.registerStudent(request).subscribe({
       next: () => {

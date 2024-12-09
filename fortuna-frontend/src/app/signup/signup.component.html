@@ -1,24 +1,3 @@
-<style>
-main {
-  padding: 5vh clamp(1rem, 5vw, 3rem) 1rem;
-}
-
-main > * {
-  width: min(100%, 70ch);
-  margin-inline: auto;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-h1 {
-  text-align: center;
-  font-size: 2rem;
-}
-</style>
-
 <main class="stack">
   <h1>Cadastro de estudantes</h1>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="stack-small">

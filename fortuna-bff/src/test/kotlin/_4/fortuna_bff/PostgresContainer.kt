@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.testcontainers.containers.PostgreSQLContainer
 
-class PostgresContainer: ApplicationContextInitializer<ConfigurableApplicationContext> {
+internal class PostgresContainer: ApplicationContextInitializer<ConfigurableApplicationContext> {
     override fun initialize(applicationContext: ConfigurableApplicationContext) {
             postgres.start()
             TestPropertyValues.of(

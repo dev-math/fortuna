@@ -7,3 +7,12 @@ spring:
     client-secret: ${GOOGLE_CLIENT_SECRET}
     scope: profile, email, openid
     authorization-grant-type: authorization_code
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fortuna
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate.ddl-auto: update

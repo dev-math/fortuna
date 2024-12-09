@@ -1,0 +1,28 @@
+<main class="stack">
+  <h1>Enviar Feedback</h1>
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="stack-small">
+    <mat-form-field>
+      <mat-label>Detalhes do Feedback</mat-label>
+      <textarea matInput formControlName="feedbackDetails"></textarea>
+      <mat-error *ngIf="isSubmitted && feedbackForm.get('feedbackDetails')?.invalid">
+        Este campo é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Situação do Relatório</mat-label>
+      <mat-select formControlName="reportSituation">
+        <mat-option value="SUITABLE">Adequado</mat-option>
+        <mat-option value="NOT_SUITABLE">Não Adequado</mat-option>
+        <mat-option value="SUITABLE_WITH_RESERVATIONS">Adequado com Reservas</mat-option>
+      </mat-select>
+      <mat-error *ngIf="isSubmitted && feedbackForm.get('reportSituation')?.invalid">
+        Por favor, selecione uma situação.
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <button type="submit" mat-flat-button color="primary">Enviar Feedback</button>
+  </form>
+</main>

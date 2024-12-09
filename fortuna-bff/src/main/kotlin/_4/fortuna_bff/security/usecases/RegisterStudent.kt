@@ -30,8 +30,9 @@ class RegisterStudent(
 
         return studentRepository.save(
             Student(
-                advisor = request.advisor,
+                email = request.email,
                 course = request.course,
+                advisor = request.advisor,
                 lattesProfile = request.lattesProfile,
                 user = user,
             ),
@@ -54,7 +55,7 @@ class RegisterStudent(
     }.validate(request)
 
     data class Request(
-        val email: String,
+        var email: String = "",
         val uspNumber: String,
         val advisor: String,
         val course: String,

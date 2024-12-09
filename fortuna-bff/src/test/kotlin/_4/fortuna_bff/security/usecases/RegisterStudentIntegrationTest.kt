@@ -16,7 +16,7 @@ import kotlin.test.assertTrue
 @Testcontainers
 @ContextConfiguration(initializers = [PostgresContainer::class])
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class RegisterStudentIntegrationTest {
+internal class RegisterStudentIntegrationTest {
 
     @Autowired
     lateinit var userRepository: UserRepository
@@ -32,6 +32,7 @@ class RegisterStudentIntegrationTest {
     }
 
     @BeforeEach
+    @AfterAll
     fun cleanUp() {
         studentRepository.deleteAll()
         userRepository.deleteAll()

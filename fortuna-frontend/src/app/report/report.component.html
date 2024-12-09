@@ -1,0 +1,48 @@
+<style>
+  .report-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .report-detail h2 {
+    text-align: center;
+  }
+  .loading {
+    text-align: center;
+  }
+</style>
+
+<main class="report-detail">
+  <div *ngIf="isLoading" class="loading">
+    <p>Carregando detalhes do relatório...</p>
+  </div>
+
+  <div *ngIf="!isLoading && report" class="report-info">
+    <h2>Relatório: {{ report?.createdAt | date: 'short' }}</h2>
+    <p><strong>Artigos em Escrita:</strong> {{ report?.articlesInWriting }}</p>
+    <p><strong>Artigos Submetidos:</strong> {{ report?.articlesSubmitted }}</p>
+    <p><strong>Artigos Aceitos:</strong> {{ report?.articlesAccepted }}</p>
+    <p><strong>Atividades Acadêmicas:</strong> {{ report?.academicActivities }}</p>
+    <p><strong>Resumo de Pesquisa:</strong> {{ report?.researchSummary }}</p>
+    <p><strong>Declaração Adicional:</strong> {{ report?.additionalDeclaration }}</p>
+    <p *ngIf="report.difficultyDetails"><strong>Detalhes das Dificuldades:</strong> {{ report?.difficultyDetails }}</p>
+
+    <div *ngIf="roles?.includes('PROFESSOR') || roles?.includes('CCP')">
+      <button mat-flat-button color="primary" (click)="navigateToFeedback(report.id)">
+        Enviar Avaliação
+      </button>
+    </div>
+
+    <h3>Feedbacks</h3>
+    <div *ngFor="let feedback of report.feedbacks">
+      <p>{{ feedback.content }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && !report" class="empty-state">
+    <p>Relatório não encontrado.</p>
+  </div>
+</main>

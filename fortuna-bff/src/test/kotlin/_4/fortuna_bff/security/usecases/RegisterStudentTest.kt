@@ -4,7 +4,7 @@ import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import kotlin.test.assertTrue
 
-class RegisterStudentTest {
+internal class RegisterStudentTest {
     private val registerStudent = RegisterStudent(
         userRepository = mockk(relaxed = true),
         studentRepository = mockk(relaxed = true)

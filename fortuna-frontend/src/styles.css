@@ -1,5 +1,5 @@
 body {
-  font-family: "Open Sans", sans-serif; 
+  font-family: "Open Sans", sans-serif;
 }
 
 .stack > * + * {
@@ -12,4 +12,33 @@ body {
 
 .stack-small > * + * {
   margin-block-start: 0.5rem;
+}
+
+main {
+  padding: 5vh clamp(1rem, 5vw, 3rem) 1rem;
+}
+
+main > * {
+  width: min(100%, 70ch);
+  margin-inline: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.h-full {
+  height: 100% !important;
+}
+
+.grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(30ch, 1fr)) !important;
+  gap: 1rem !important;
 }

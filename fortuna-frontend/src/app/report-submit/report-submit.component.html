@@ -1,0 +1,61 @@
+<main class="stack">
+  <h1>Envio de Relatórios</h1>
+  <form [formGroup]="reportForm" (ngSubmit)="onSubmit()" class="stack-small">
+    <mat-form-field>
+      <mat-label>Artigos em fase de escrita</mat-label>
+      <input matInput type="number" formControlName="articlesInWriting">
+      <mat-error *ngIf="isSubmitted && reportForm.get('articlesInWriting')?.invalid">
+        Insira um número válido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Artigos submetidos</mat-label>
+      <input matInput type="number" formControlName="articlesSubmitted">
+      <mat-error *ngIf="isSubmitted && reportForm.get('articlesSubmitted')?.invalid">
+        Insira um número válido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Artigos aceitos/publicados</mat-label>
+      <input matInput type="number" formControlName="articlesAccepted">
+      <mat-error *ngIf="isSubmitted && reportForm.get('articlesAccepted')?.invalid">
+        Insira um número válido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Atividades acadêmicas</mat-label>
+      <textarea matInput formControlName="academicActivities"></textarea>
+      <mat-error *ngIf="isSubmitted && reportForm.get('academicActivities')?.invalid">
+        Este campo é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Resumo da pesquisa</mat-label>
+      <textarea matInput formControlName="researchSummary"></textarea>
+      <mat-error *ngIf="isSubmitted && reportForm.get('researchSummary')?.invalid">
+        Este campo é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Declaração adicional</mat-label>
+      <textarea matInput formControlName="additionalDeclaration"></textarea>
+      <mat-error *ngIf="isSubmitted && reportForm.get('additionalDeclaration')?.invalid">
+        Este campo é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Dificuldades (opcional)</mat-label>
+      <textarea matInput formControlName="difficultyDetails"></textarea>
+    </mat-form-field>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <button type="submit" mat-flat-button color="primary">Enviar Relatório</button>
+  </form>
+</main>
